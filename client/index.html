@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Easy URL Shortner</title>
+	</head>
+	<body>
+		<container class="container">
+			<form action="http://localhost:8000/api/shorten" method="POST">
+				<input
+					type="text"
+					name="url"
+					id="url"
+					placeholder="Shorten a link here..."
+				/>
+				<button class="type" ="submit">Shorten it!</button>
+			</form>
+		</container>
+		<container class="list">
+			<div class="list-element">
+				<h3>www.google.com.br</h3>
+				<div class="short-url">
+					<span>http://urlshort/as12</span>
+					<button class="copy-button">Copy</button>
+				</div>
+			</div>
+            <div class="list-element">
+				<h3>www.google.com.br</h3>
+				<div class="short-url">
+					<span>http://urlshort/as12</span>
+					<button class="copy-button">Copy</button>
+				</div>
+			</div>
+		</container>
+	</body>
+</html>
+
+<style>
+	@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap");
+
+	* {
+		font-family: "Roboto", sans-serif;
+	}
+
+	body {
+		position: relative;
+		height: 100vh;
+        width: 60vw;
+		background-color: #dadadc;
+        margin: auto;
+	}
+
+	form {
+		display: flex;
+		gap: 1rem;
+		justify-content: space-between;
+	}
+
+	input {
+		display: flex;
+		flex-grow: 1;
+		padding-left: 1rem;
+		border-radius: 0.5rem;
+		background-color: #f3f2f7;
+		border: none;
+		font-size: 16px;
+	}
+
+	input:focus {
+		outline: 2px solid #60c8cb;
+	}
+
+	button {
+		margin: 0;
+		font-size: 16px;
+		padding: 0.75rem;
+		border-radius: 0.5rem;
+		border: none;
+		background-color: #60c8cb;
+		color: #f3f2f7;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background-color: #00c8cb;
+	}
+
+	.container {
+		display: flex;
+		margin: auto;
+        margin-top: 2rem;
+		padding: 1.5rem 2rem 1.5rem 2rem;
+		background-color: #4b3f6b;
+		flex-direction: column;
+		height: auto;
+		border-radius: 0.25rem;
+	}
+
+	.list {
+        justify-content: space-between;
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+        gap: 0.5rem;
+		margin-top: 1rem;
+	}
+
+	.list-element {
+		background-color: #f3f2f7;
+		color: #4b3f6b;
+		display: flex;
+        padding: 0rem 2rem 0rem 2rem;
+		gap: 1rem;
+        border-radius: 0.5rem;
+        justify-content: space-between;
+	}
+
+	.copy-button {
+		background-color: #60c8cb;
+		color: #f3f2f7;
+		border: none;
+		padding: 0.5rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		font-size: 16px;
+	}
+
+	.short-url {
+        
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+	}
+</style>
