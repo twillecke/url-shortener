@@ -1,7 +1,7 @@
 import express from "express";
 import { createClient } from "redis";
 
-const BASE_URL = "http://localhost/";
+const BASE_URL = "http://localhost";
 const PORT = 3000;
 const app = express();
 
@@ -9,6 +9,16 @@ const redisClient = createClient();
 redisClient.connect();
 
 app.use(express.json());
+
+app.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+	res.setHeader(
+		"Access-Control-Allow-Headers",
+		"Content-Type, Authorization"
+	);
+	next();
+});
 
 app.get("/:hash", async (req, res) => {
 	const hash = req.params.hash;
@@ -46,7 +56,7 @@ app.post("/", async (req, res) => {
 			const response = {
 				key: redisResponse.value,
 				"long-url": longUrl,
-				"short-url": `${BASE_URL}${hash}`,
+				"short-url": `${BASE_URL}:${PORT}/${hash}`,
 			};
 			res.status(200).send(response);
 		} else {
