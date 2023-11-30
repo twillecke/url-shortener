@@ -26,6 +26,17 @@ app.get("/:hash", async (req, res) => {
 
 app.post("/", async (req, res) => {
 	const longUrl = req.body.url;
+	const urlRegex =
+		/^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+
+	if (!urlRegex.test(longUrl)) {
+		res.status(400).send({
+			error: "Bad Request",
+			details: "The provided URL is not valid",
+		});
+		return;
+	}
+
 	const hash = hashUrl(longUrl);
 
 	try {
@@ -63,11 +74,8 @@ function hashUrl(url: string) {
 	for (let i = 0; i < url.length; i++) {
 		const char = url.charCodeAt(i);
 		hash = (hash << 5) - hash + char;
-		// Make sure the hash fits within 16 bits
 		hash = hash & 0xffff;
 	}
-
-	// Map the hash to a string of letters and numbers
 	return hash.toString(36);
 }
 
@@ -95,7 +103,7 @@ async function retrieveFromRedis(hash: string) {
 	try {
 		const existingValue = await redisClient.get(hash);
 
-		if (existingValue === null) {
+		if (!existingValue) {
 			return { success: false, message: "Value not found in Redis" };
 		}
 		return {
