@@ -13,7 +13,7 @@
 					type="text"
 					name="url"
 					id="url"
-					placeholder="Shorten a link here..."
+					placeholder="e.g. http://www.google.com"
 				/>
 				<button class="type" onclick="shortenUrl(event)">
 					Shorten it!
@@ -31,9 +31,22 @@
 					},
 					body: JSON.stringify({ url }),
 				})
-					.then((res) => res.json())
+					.then((res) => {
+						if (res.ok) {
+							return res.json();
+						} else {
+							const element = document.getElementById("url");
+							element.classList.add("error-border");
+							throw new Error("Request failed");
+						}
+					})
 					.then((data) => {
-						createShortUrlElement(url, data["short-url"]);
+						console.log(data);
+						const shortUrl = data["short-url"];
+						const element = document.getElementById("url");
+						element.classList.remove("error-border");
+						document.getElementById("url").value = ""; // Clear the input field
+						createShortUrlElement(url, shortUrl);
 					})
 					.catch((err) => console.log(err));
 			}
@@ -44,9 +57,15 @@
 
 				const listElement = document.createElement("div");
 				listElement.className = "list-element";
+				listElement.id = shortUrlStr;
+
+				const longUrlLink = document.createElement("a");
+				longUrlLink.textContent = longUrlStr;
+				longUrlLink.href = longUrlStr;
+				longUrlLink.target = "_blank";
 
 				const heading = document.createElement("h3");
-				heading.textContent = longUrlStr;
+				heading.appendChild(longUrlLink);
 				listElement.appendChild(heading);
 
 				const shortUrlContainer = document.createElement("div");
@@ -54,21 +73,33 @@
 
 				const shortUrlSpan = document.createElement("span");
 				shortUrlSpan.textContent = shortUrlStr;
+				shortUrlSpan.id = "short-url";
 				shortUrlContainer.appendChild(shortUrlSpan);
 
 				const copyButton = document.createElement("button");
 				copyButton.className = "copy-button";
 				copyButton.textContent = "Copy";
+				copyButton.addEventListener("click", () => {
+					navigator.clipboard
+						.writeText(shortUrlStr)
+						.then(() => {
+							copyButton.classList.add("copied");
+							copyButton.textContent = "Copied!";
+							console.log("URL copied to clipboard");
+						})
+						.catch((err) => {
+							console.log(
+								"Failed to copy URL to clipboard:",
+								err,
+							);
+						});
+				});
 				shortUrlContainer.appendChild(copyButton);
 
 				listElement.appendChild(shortUrlContainer);
 				container.appendChild(listElement);
 				document.body.appendChild(container);
 			}
-			createShortUrlElement(
-				"https://www.google.com/",
-				"http://smallurl/abc123",
-			);
 		</script>
 	</body>
 </html>

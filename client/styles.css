@@ -1,95 +1,163 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap");
 
+* {
+	font-family: "Roboto", sans-serif;
+	font-size: 20px;
+}
+
+body {
+	position: relative;
+	height: 100vh;
+	width: 60vw;
+	background-color: #dadadc;
+	margin: auto;
+}
+
+a {
+	max-width: 55ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block; /* Ensures the link doesn't break to a new line */
+}
+
+/* Media Query for Large Screens */
+@media screen and (min-width: 1200px) {
+	body {
+		width: 60vw;
+	}
+}
+
+/* Media Query for Medium Screens */
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+	body {
+		width: 80vw;
+	}
+	a {
+		max-width: 18ch;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		display: inline-block; /* Ensures the link doesn't break to a new line */
+	}
+
+	#short-url {
+		max-width: 17ch;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		display: inline-block;
+	}
+}
+
+/* Media Query for Small Screens */
+@media screen and (max-width: 767px) {
 	* {
 		font-family: "Roboto", sans-serif;
+		font-size: 16px;
 	}
 
 	body {
-		position: relative;
-		height: 100vh;
-		width: 60vw;
-		background-color: #dadadc;
-		margin: auto;
+		width: 90vw;
 	}
 
-	form {
-		display: flex;
-		gap: 1rem;
-		justify-content: space-between;
+	#short-url {
+		display: none;
 	}
+	a {
+		max-width: 22ch;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		display: inline-block; /* Ensures the link doesn't break to a new line */
+	}
+}
 
-	input {
-		display: flex;
-		flex-grow: 1;
-		padding-left: 1rem;
-		border-radius: 0.5rem;
-		background-color: #f3f2f7;
-		border: none;
-		font-size: 16px;
-	}
+form {
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+}
 
-	input:focus {
-		outline: 2px solid #60c8cb;
-	}
+input {
+	display: flex;
+	flex-grow: 1;
+	padding-left: 1rem;
+	border-radius: 0.5rem;
+	background-color: #f3f2f7;
+	font-size: 16px;
+}
 
-	button {
-		margin: 0;
-		font-size: 16px;
-		padding: 0.75rem;
-		border-radius: 0.5rem;
-		border: none;
-		background-color: #60c8cb;
-		color: #f3f2f7;
-		font-weight: bold;
-		cursor: pointer;
-	}
+.error-border {
+	border: solid 2px rgb(249, 70, 70);
+}
 
-	button:hover {
-		background-color: #00c8cb;
-	}
+input:focus {
+	outline: 2px solid #60c8cb;
+}
 
-	.container {
-		display: flex;
-		margin: auto;
-		margin-top: 2rem;
-		padding: 1.5rem 2rem 1.5rem 2rem;
-		background-color: #4b3f6b;
-		flex-direction: column;
-		height: auto;
-		border-radius: 0.25rem;
-	}
+button {
+	margin: 0;
+	font-size: 16px;
+	padding: 0.75rem;
+	border-radius: 0.5rem;
+	border: none;
+	background-color: #60c8cb;
+	color: #f3f2f7;
+	font-weight: bold;
+	cursor: pointer;
+}
 
-	.list {
-		justify-content: space-between;
-		display: flex;
-		margin: auto;
-		flex-direction: column;
-		gap: 0.5rem;
-		margin-top: 1rem;
-	}
+button:hover {
+	background-color: #00c8cb;
+}
 
-	.list-element {
-		background-color: #f3f2f7;
-		color: #4b3f6b;
-		display: flex;
-		padding: 0rem 2rem 0rem 2rem;
-		gap: 1rem;
-		border-radius: 0.5rem;
-		justify-content: space-between;
-	}
+.container {
+	display: flex;
+	margin: auto;
+	margin-top: 2rem;
+	padding: 1.5rem 2rem 1.5rem 2rem;
+	background-color: #4b3f6b;
+	flex-direction: column;
+	height: auto;
+	border-radius: 0.5rem;
+}
 
-	.copy-button {
-		background-color: #60c8cb;
-		color: #f3f2f7;
-		border: none;
-		padding: 0.5rem;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
-		font-size: 16px;
-	}
+.list {
+	justify-content: space-between;
+	display: flex;
+	margin: auto;
+	flex-direction: column;
+	margin-top: 0.5rem;
+}
 
-	.short-url {
-		display: flex;
-		gap: 1rem;
-		align-items: center;
-	}
+.list-element {
+	background-color: #f3f2f7;
+	color: #4b3f6b;
+	display: flex;
+	padding: 0rem 2rem 0rem 2rem;
+	gap: 1rem;
+	border-radius: 0.5rem;
+	justify-content: space-between;
+}
+
+.copy-button {
+	background-color: #60c8cb;
+	color: #f3f2f7;
+	border: none;
+	padding: 0.5rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	font-size: 16px;
+}
+
+.copied {
+	background-color: #ffe75f;
+	color: #4b3f6b;
+}
+
+.short-url {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
