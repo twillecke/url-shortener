@@ -13,8 +13,9 @@ app.use(express.json());
 app.get("/:hash", async (req, res) => {
 	const hash = req.params.hash;
 	const redisResponse = await retrieveFromRedis(hash);
-	if (redisResponse) {
-		res.status(200).send(redisResponse);
+	if (redisResponse.success) {
+		if (typeof redisResponse.value === "string")
+			res.status(302).location(redisResponse.value).send();
 	} else {
 		res.status(404).send({
 			success: false,
@@ -67,7 +68,7 @@ function hashUrl(url: string) {
 	}
 
 	// Map the hash to a string of letters and numbers
-	return  hash.toString(36);
+	return hash.toString(36);
 }
 
 async function saveToRedis(longUrl: string, hash: string) {
