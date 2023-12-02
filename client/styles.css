@@ -2,7 +2,15 @@
 
 * {
 	font-family: "Roboto", sans-serif;
-	font-size: 20px;
+	font-size: 24px;
+}
+
+h1{
+	font-size: 48px;
+	text-align: center;
+	color: #4b3f6b;
+	font-weight: lighter;
+	margin-bottom: 0rem;
 }
 
 body {
@@ -24,7 +32,7 @@ a {
 /* Media Query for Large Screens */
 @media screen and (min-width: 1200px) {
 	body {
-		width: 60vw;
+		width: 55vw;
 	}
 }
 
@@ -81,6 +89,7 @@ form {
 
 input {
 	display: flex;
+	border: none;
 	flex-grow: 1;
 	padding-left: 1rem;
 	border-radius: 0.5rem;
@@ -89,7 +98,7 @@ input {
 }
 
 .error-border {
-	border: solid 2px rgb(249, 70, 70);
+	border: solid 2px rgb(243, 129, 129);
 }
 
 input:focus {
@@ -114,13 +123,13 @@ button:hover {
 
 .container {
 	display: flex;
-	margin: auto;
-	margin-top: 2rem;
+	margin-top: 0.5rem;
 	padding: 1.5rem 2rem 1.5rem 2rem;
 	background-color: #4b3f6b;
 	flex-direction: column;
 	height: auto;
 	border-radius: 0.5rem;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .list {
@@ -139,6 +148,7 @@ button:hover {
 	gap: 1rem;
 	border-radius: 0.5rem;
 	justify-content: space-between;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .copy-button {
@@ -149,10 +159,12 @@ button:hover {
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
 	font-size: 16px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .copied {
 	background-color: #ffe75f;
+	box-shadow: none;
 	color: #4b3f6b;
 }
 
