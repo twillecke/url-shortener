@@ -50,7 +50,7 @@ You can interact with the URL shortener API by sending HTTP requests. Here are t
 
 ### 1. Shorten a URL (POST)
 
-Send a POST request to `http://localhost:3000` with the following JSON payload:
+Send a POST request to 'https://url-shortner-api-t5uy.onrender.com' or, if running locally, `http://localhost:3000` with the following JSON payload:
 
 ```json
 POST http://localhost:3000

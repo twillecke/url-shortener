@@ -1,7 +1,7 @@
 function shortenUrl(event) {
 	event.preventDefault();
 	const url = document.getElementById("url").value;
-	fetch("http://localhost:3000/", {
+	fetch("https://url-shortner-api-t5uy.onrender.com/", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
