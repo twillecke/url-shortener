@@ -1,11 +1,16 @@
 import express from "express";
 import { createClient } from "redis";
 
-const BASE_URL = "http://localhost";
-const PORT = 3000;
+const BASE_URL = process.env.BASE_URL || "http://localhost";
+const PORT = process.env.PORT || 3000;
+const REDIS_HOST = process.env.REDIS_HOST || "localhost";
+const REDIS_PORT = parseInt(process.env.REDIS_PORT || "6379");
+
 const app = express();
 
-const redisClient = createClient();
+const redisClient = createClient({
+	url: `redis://${REDIS_HOST}:${REDIS_PORT}`,
+});
 redisClient.connect();
 
 app.use(express.json());
@@ -15,14 +20,14 @@ app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Methods", "GET, POST");
 	res.setHeader(
 		"Access-Control-Allow-Headers",
-		"Content-Type, Authorization"
+		"Content-Type, Authorization",
 	);
 	next();
 });
 
 app.get("/:hash", async (req, res) => {
 	const hash = req.params.hash;
-	const redisResponse = await retrieveFromRedis(hash);
+	const redisResponse = await getData(hash);
 	if (redisResponse.success) {
 		if (typeof redisResponse.value === "string")
 			res.status(302).location(redisResponse.value).send();
@@ -50,7 +55,7 @@ app.post("/", async (req, res) => {
 	const hash = hashUrl(longUrl);
 
 	try {
-		const redisResponse = await saveToRedis(longUrl, hash);
+		const redisResponse = await setData(longUrl, hash);
 
 		if (redisResponse.success) {
 			const response = {
@@ -75,7 +80,7 @@ app.post("/", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-	console.log("Server running on port 3000");
+	console.log(`Server running on port ${PORT}`);
 });
 
 function hashUrl(url: string) {
@@ -89,7 +94,7 @@ function hashUrl(url: string) {
 	return hash.toString(36);
 }
 
-async function saveToRedis(longUrl: string, hash: string) {
+async function setData(longUrl: string, hash: string) {
 	try {
 		const existingValue = await redisClient.get(longUrl);
 		if (existingValue) {
@@ -109,7 +114,7 @@ async function saveToRedis(longUrl: string, hash: string) {
 	}
 }
 
-async function retrieveFromRedis(hash: string) {
+async function getData(hash: string) {
 	try {
 		const existingValue = await redisClient.get(hash);
 
