@@ -1,6 +1,13 @@
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
+
+
 # Simple URL Shortener API + Client
 
 A straightforward URL shortener project built with Express.js, Redis, and TypeScript.
+
+Check client demo at: https://url-shortner-jldn.onrender.com/
 
 ## Getting Started
 
