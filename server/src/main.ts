@@ -61,7 +61,7 @@ app.post("/", async (req, res) => {
 			const response = {
 				key: redisResponse.value,
 				"long-url": longUrl,
-				"short-url": `${BASE_URL}:${PORT}/${hash}`,
+				"short-url": `${BASE_URL}/${hash}`,
 			};
 			res.status(200).send(response);
 		} else {

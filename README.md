@@ -89,8 +89,8 @@ Feel free to customize the endpoint paths and add more details based on your act
 
 ## Scripts
 
-- **npm run dev**: Run the development server with automatic restarts using Nodemon.
-- **npm run build**: Install dependencies and compile TypeScript code into JavaScript.
-- **npm start**: Start service from build (used for deploying)
+- `npm run dev`: Run the development server with automatic restarts using Nodemon.
+- `npm run build`: Install dependencies and compile TypeScript code into JavaScript.
+- `npm start`: Start service from build (used for deploying purposes)
 
 Happy URL shortening! If you encounter any issues or have suggestions, please let us know.
